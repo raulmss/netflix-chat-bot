@@ -20,9 +20,15 @@ jobs:
       - name: Copy files to EC2
         run: |
           ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
-            cd ~/app || mkdir -p ~/app && cd ~/app
-            git pull origin main || git clone https://github.com/raulmss/netflix-chat-bot.git
+            cd ~
+            if [ ! -d "netflix-chat-bot" ]; then
+              git clone https://github.com/raulmss/netflix-chat-bot.git
+            fi
+            cd netflix-chat-bot
+            git pull origin main
+      
             echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" > .env
-            docker compose down --remove-orphans
-            docker compose up --build -d
+      
+            docker compose down --remove-orphans || true
+            docker compose up -d --build
           EOF
