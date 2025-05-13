@@ -21,7 +21,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
             cd ~/app || mkdir -p ~/app && cd ~/app
-            git pull origin main || git clone https://github.com/${{ github.repository }} .
+            git pull origin main || git clone https://github.com/raulmss/netflix-chat-bot.git .
             echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" > .env
             docker compose down --remove-orphans
             docker compose up --build -d
