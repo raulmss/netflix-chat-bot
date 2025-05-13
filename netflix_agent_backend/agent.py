@@ -5,7 +5,10 @@ import os
 from sentence_transformers import SentenceTransformer
 
 # ✅ Set up Gemini API key
-genai.configure(api_key="GEMINI_API_KEY")  # Replace with your real key
+api_key = os.environ.get("GEMINI_API_KEY")
+if not api_key:
+    raise EnvironmentError("❌ GEMINI_API_KEY environment variable not set.")
+genai.configure(api_key=api_key)
 
 # ✅ Define the correct Gemini model
 GEMINI_MODEL_NAME = "models/gemini-1.5-flash"

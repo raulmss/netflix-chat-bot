@@ -7,7 +7,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://netflix-chat-bot.raulsouto.com"],
+    allow_origins=["http://localhost:5173", "http://netflix-chat-bot.raulsouto.com"],
     allow_methods=["*"],
     allow_headers=["*"],
 )

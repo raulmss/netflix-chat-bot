@@ -4,3 +4,5 @@ pydantic
 sentence-transformers
 google-generativeai
 numpy
+requests
+beautifulsoup4
